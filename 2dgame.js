@@ -191,7 +191,7 @@ console.log(this.keys)
             this.fps = 20;
             this.frameTimer = 0;
             this.frameInterval = 1000 / this.fps;
-            this.speed = Math.random() * 12 +5;
+            this.speed = Math.random() * 12 + 12;
             this.markedForDeletion = false;
         }
         draw(context) {
