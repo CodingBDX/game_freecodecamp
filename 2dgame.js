@@ -16,7 +16,7 @@ window.addEventListener('load', function() {
             this.keys = [];
             this.touchY = '';
             this.touchTreshold = 30;
-            window.addEventListener('keydown', e => { 
+            window.addEventListener('keydown', e => {
                 if ((e.key === "ArrowDown" ||
                     e.key === 'ArrowUp' ||
                     e.key === 'ArrowLeft' ||
@@ -26,10 +26,10 @@ window.addEventListener('load', function() {
                     // console.log(this.key)
                 }
                 else if (e.key === "Enter" && gameOver === true) restartGame();
-            })
+            });
 
 
-            window.addEventListener('keyup', e => { 
+            window.addEventListener('keyup', e => {
                 if (e.key === "ArrowDown" ||
                     e.key === 'ArrowUp' ||
                     e.key === 'ArrowLeft' ||
@@ -37,27 +37,30 @@ window.addEventListener('load', function() {
                     this.keys.splice(this.keys.indexOf(e.key), 1);
                 }
                
-            })
+            });
 
             window.addEventListener('touchstart', e => {
                 this.touchY = e.changedTouches[0].pageY;
-            })
+                // console.log( e.changedTouches[0].pageY)
+            });
             
-                 window.addEventListener('touchmove', e => {
-                     const swipDistance = e.changedTouches[0].pageY - this.touchY;
-                     if (swipDistance < -this.touchTreshold && this.keys.indexOf('swipe up') === -1) this.keys.push('swipe up');
-                     else if (swipDistance > this.touchTreshold && this.keys.indexOf('swipe down') === -1) {
-                         this.keys.push('swipe down');
-                         if (gameOver) restartGame();
-                     }
-                 })
+            window.addEventListener('touchmove', e => {
+                const swipDistance = e.changedTouches[0].pageY - this.touchY;
+
+                if (swipDistance < -this.touchTreshold && this.keys.indexOf('swipe up') === -1) this.keys.push('swipe up');
+
+                else if (swipDistance > this.touchTreshold && this.keys.indexOf('swipe down') === -1) {
+                    this.keys.push('swipe down');
+                    if (gameOver) restartGame();
+                }
+            });
             
-                 window.addEventListener('touchend', e => {
-                    this.keys.splice(this.keys.indexOf('swipe up'), 1);
-                    this.keys.splice(this.keys.indexOf('swipe down'), 1);
+            window.addEventListener('touchend', e => {
+                this.keys.splice(this.keys.indexOf('swipe up'), 1);
+                this.keys.splice(this.keys.indexOf('swipe down'), 1);
+console.log(this.keys)
 
-
-                })
+            });
                 
         }
      }
@@ -188,7 +191,7 @@ window.addEventListener('load', function() {
             this.fps = 20;
             this.frameTimer = 0;
             this.frameInterval = 1000 / this.fps;
-            this.speed = 5;
+            this.speed = 6;
             this.markedForDeletion = false;
         }
         draw(context) {
@@ -215,7 +218,7 @@ window.addEventListener('load', function() {
     function handleEnemies(deltaTime) {
         if (enemyTimer > enemyInterval + randomEnemyInterval) {
             enemies.push(new Enemy(canvas.width, canvas.height));
-    let randomEnemyInterval = Math.random() * 3000 + 1000;
+    let randomEnemyInterval = Math.random() * 2000 + 500;
 
             enemyTimer = 0;
             
