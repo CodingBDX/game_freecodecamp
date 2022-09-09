@@ -8,7 +8,7 @@ window.addEventListener('load', function() {
 
 
     let gameOver = false;
-
+    const fullscreenButton = document.getElementById('buttonFullscreen');
 
 
     class inputhandler {
@@ -71,9 +71,9 @@ console.log(this.keys)
             this.gameheight = gameheight;
             this.width = 200;
             this.height = 200;
-            this.x = 0;
+            this.x = 150;
             this.speed = 0;
-            this.y = this.gameheight - this.height;
+            this.y =  this.gameheight - this.height;
             this.vy = 0;
             this.image = document.getElementById('playerImage');
             this.weight = 1;
@@ -91,8 +91,13 @@ console.log(this.keys)
         }
         draw(context) {
             // context.fillStyle = 'white';
+            // context.lineWidth = 5;
+            // context.strokeStyle = 'white';
+            // context.beginPath();
+            // context.arc(this.x + this.width / 2, this.y + this.height / 2, this.width / 2, 0, Math.PI * 2);
+            // context.stroke();
             // context.fillRect(this.x, this.y, this.width, this.height)
-            context.drawImage(this.image,this.frameX * this.width,0, this.width, this.height, this.x,this.y, this.width, this.height);
+            context.drawImage(this.image,this.frameX * this.width,0, this.width, this.height, this.x,this.y - 90, this.width, this.height);
         }
         update(input, deltaTime, enemies) {
             // collision detection
@@ -156,6 +161,7 @@ console.log(this.keys)
             this.gameWidth = gameWidth;
             this.gameheight = gameheight;
             this.image = document.getElementById('backgroundImage');
+            this.platforme = document.getElementById('platformImage');
             this.x = 0;
             this.y = 0;
             this.width = 2400;
@@ -167,7 +173,11 @@ console.log(this.keys)
         }
         draw(context) {
             context.drawImage(this.image,this.x, this.y, this.width, this.height)
+            context.drawImage(this.platforme,this.x, this.y, this.width, this.height)
+
             context.drawImage(this.image,this.x + this.width - this.speed, this.y, this.width, this.height)
+            context.drawImage(this.platforme,this.x + this.width - this.speed, this.y, this.width, this.height)
+
 
         }
 
@@ -196,7 +206,7 @@ console.log(this.keys)
         }
         draw(context) {
             // context.strokeRect(this.x, this.y, this.width, this.height)
-            context.drawImage(this.image,this.frameX * this.width,0, this.width, this.height, this.x, this.y, this.width, this.height )
+            context.drawImage(this.image,this.frameX * this.width,0, this.width, this.height, this.x, this.y -80,this.width, this.height )
          }
         update(deltaTime) {
             if (this.frameTimer > this.frameInterval) {
@@ -241,9 +251,19 @@ console.log(this.keys)
         context.font = '40px Helvetica';
         
             context.textAlign = 'center';
-            context.fillText('gameOver! taper enter to restart :', canvas.width/2 ,canvas.height/2)
+            context.fillText('gameOver! taper entrer  ou swipe pour recommencer :', canvas.width/2 ,canvas.height/2)
 }
     }
+
+    function toggleScreen() {
+        if (!document.fullscreenElement) {
+            canvas.requestFullscreen().then().catch(err=> console.log(err));
+        } else {
+            document.exitFullscreen();
+}
+    };
+    fullscreenButton.addEventListener('click', toggleScreen)
+    
 
     function restartGame() {
         player.restart();
