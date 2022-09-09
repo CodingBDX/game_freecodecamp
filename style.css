@@ -71,6 +71,19 @@ height: 70vh;
     background-image: url('./img/background/foggy.png');
 }
 
+#canvas6 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+
+img {
+    display: none;
+}
+
 
 #collisionCanvas {
     cursor: url('./img/target.svg'), auto;
